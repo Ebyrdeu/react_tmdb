@@ -1,19 +1,19 @@
 import React from 'react';
-import {useParams} from "react-router-dom";
-import {useCredits} from "../hooks/useMovie";
+import {Link, useParams} from "react-router-dom";
+import {useCredits} from "../../hooks/useMovie";
 import {Box, Card, CardActionArea, CardContent, CardMedia, Container, Skeleton, Typography} from "@mui/material";
-import noImage from "../assets/img/no-image.png";
+import noImage from "../../assets/img/no-image.png";
 
 const CardCast = () => {
 	const onSuccess = (data) => console.log(data?.data)
 
 	const {id} = useParams();
-	const {data, isLoading, isError} = useCredits(onSuccess, id);
-
+	const {data, isLoading} = useCredits(onSuccess, id);
 
 	const RenderedCastCards = () => {
 		return data?.data.cast.map(({id, name, character, profile_path}) => {
-			return (<Card key={id} sx={{width: 180, mr: 2, mt: 3}}>
+			return (<Card as={Link}
+			              to={`/info/actors/${id}`} key={id} sx={{width: 180, mr: 2, mt: 3, textDecoration: 'none', background: '#fafafafa', color: '#5c728a'}}>
 				<CardActionArea>
 					{isLoading ? <Skeleton variant="rectangular" width={180} height={200}/> : <CardMedia
 						sx={{height: '200px', objectPosition: 'top'}}

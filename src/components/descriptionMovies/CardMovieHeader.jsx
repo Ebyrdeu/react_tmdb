@@ -1,10 +1,11 @@
 import React from 'react';
 import {Box, Chip, CircularProgress, Container, Skeleton, Typography} from "@mui/material";
 import styled from "styled-components";
-import noImage from '../assets/img/no-image.png'
+import noImage from '../../assets/img/no-image.png'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import {useParams} from "react-router-dom";
-import {useSingleMovie} from "../hooks/useMovie";
+import {useSingleMovie} from "../../hooks/useMovie";
+import WhileLoading from "../WhileLoading";
 
 const HeaderCardWrapper = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const HeaderCardWrapper = styled.div`
 }
 `
 
-
+// ! Rating
 const CircularProgressWithLabel = (props) =>  {
 	return (
 	<Box sx={{mr: 1}}>
@@ -43,16 +44,18 @@ const CircularProgressWithLabel = (props) =>  {
 }
 
 
-const CardHeader = () => {
+const CardMovieHeader = () => {
 	const onSuccess = (data) => console.log(data?.data)
 
 	const { id } = useParams();
-	const {data, isLoading, isError} = useSingleMovie(onSuccess, id)
+	const {data, isLoading} = useSingleMovie(onSuccess, id);
 
-	if (isLoading) return <h2>loading</h2>
+	if (isLoading) return <WhileLoading/>
 
 	const {title, overview, backdrop_path, poster_path, genres, release_date, vote_average, vote_count} = data?.data;
 
+
+	//!  Genres
 	const GenreChip = () => genres.map(({name}) => isLoading ? <Skeleton animation="wave" width={80} sx={{mr: 1}}/> : <Chip key={name} sx={{mr: 1, mt: 1, mb: 1}} label={name}/>)
 
 	return (
@@ -95,4 +98,4 @@ const CardHeader = () => {
 	);
 };
 
-export default CardHeader;
+export default CardMovieHeader;

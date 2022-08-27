@@ -1,6 +1,6 @@
 import {Box, Button, Container, Typography} from "@mui/material";
 import {NavLink, useNavigate} from 'react-router-dom';
-import Globe from "../components/Globe";
+import Globe from "../components/background_animations/Globe";
 
 
 const AppNotFound = () => {
