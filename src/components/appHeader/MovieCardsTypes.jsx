@@ -4,8 +4,9 @@ import {Link} from "react-router-dom";
 import GradeIcon from "@mui/icons-material/Grade";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import {slideInLeft, zoomIn} from 'react-animations';
-import noImage from '../assets/img/no-image.png'
-import {Fragment} from "react";
+import noImage from '../../assets/img/no-image.png'
+import {Fragment, useContext} from "react";
+import {HeaderInputContext} from "../../context/HeaderInputContext";
 
 const zoomInAnimation = keyframes`${zoomIn}`;
 const slideInLeftAnimation = keyframes`${slideInLeft}`;
@@ -18,7 +19,8 @@ const BouncyDiv = styled.div`
   margin: 10px;
 `;
 
-const MovieCardsTypes = ({data, cardType, hasNextPage}) => {
+const MovieCardsTypes = ({data, hasNextPage}) => {
+	const {cardType} = useContext(HeaderInputContext);
 	const item1 = data?.pages.map(({data}, i) => {
 		return <Fragment key={i} children={data.results.map(({id, title, backdrop_path, poster_path, vote_average, vote_count, release_date}) => {
 			const renderedCards = <Card

@@ -28,3 +28,9 @@ export const useMovieCredits = (onSuccess, movieId) => {
 	const {getMovieCredits} = useTMDBService();
 	return useQuery(['movie-desc-credits', movieId], () => getMovieCredits(movieId), {onSuccess})
 };
+
+export const useMovieSearch = (onSuccess, searchParam) => useInfiniteQuery(['discover-movies', searchParam],  ({pageParam = 1}) =>
+		axios.get(`https://api.themoviedb.org/3/search/movie?api_key=1a77ef90c2c91a98096443b7b114f4be&query=${searchParam}&page=${pageParam}`), {
+		onSuccess,
+		getNextPageParam: (_lastPage, allPages) => (allPages.length < allPages[0].data.total_pages) ? allPages.length + 1 : undefined,
+	});

@@ -5,7 +5,7 @@ import noImage from '../../assets/img/no-image.png'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import {useParams} from "react-router-dom";
 import {useSingleMovie} from "../../hooks/useMovie";
-import WhileLoading from "../WhileLoading";
+import WhileLoading from "../misc/WhileLoading";
 
 const HeaderCardWrapper = styled.div`
   display: flex;

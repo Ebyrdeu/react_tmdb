@@ -4,7 +4,7 @@ import {useActors} from "../../hooks/useMovie";
 import {Box, Container, Skeleton, Typography} from "@mui/material";
 import noImage from "../../assets/img/no-image.png";
 import styled from "styled-components";
-import WhileLoading from "../WhileLoading";
+import WhileLoading from "../misc/WhileLoading";
 
 const HeaderCardWrapper = styled.div`
   display: flex;
